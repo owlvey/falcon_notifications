@@ -1,5 +1,5 @@
 from app.core.MemberEntity import MemberEntity
-
+from datetime import datetime
 
 class NotificationEntity:
     def __init__(self):
@@ -13,7 +13,7 @@ class NotificationEntity:
         self.whom = list()  # type list[MemberEntity]
 
     def get_action_icon(self):
-        return ":eyes:"
+        return ":fire:"
 
     def get_emotion_icon(self):
         if self.emotion == 1:
@@ -26,13 +26,16 @@ class NotificationEntity:
             return ""
         return ""
 
-    def get_message(self):
-        temporal = "{} At {} , in {} , {} because {}. {} ".format(self.get_action_icon(),
-                                                                  ",".join(self.when), ",".join(self.where),
-                                                                  ",".join(self.what), ",".join(self.why),
-                                                                  self.get_emotion_icon())
+    def get_message(self, member: MemberEntity):
+
+        greetings = "Good " + ("morning <@" if datetime.now().hour < 12 else "afternoon <@") + member.slack_member + ">"
+
+        temporal = " {} \n {} At {} , in {} , {} because {}. {} ".format(greetings, self.get_action_icon(),
+                                                                      ",".join(self.when), ",".join(self.where),
+                                                                      ",".join(self.what), ",".join(self.why),
+                                                                      self.get_emotion_icon())
         if self.references:
-            temporal += " Please review :male-detective:  {}".format(",".join(self.references))
+            temporal += " Please check :male-detective:  {}".format(",".join(self.references))
 
         return temporal
 

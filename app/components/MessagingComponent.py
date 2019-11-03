@@ -13,5 +13,5 @@ class MessagingComponent:
                                notification.whom)
 
         for item in slack_members:
-            self.slack_gateway.send_message(item.slack_member, notification.get_message())
+            self.slack_gateway.send_message(item.slack_member, notification.get_message(item))
             item.notified = True
