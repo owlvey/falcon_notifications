@@ -13,29 +13,34 @@ class NotificationEntity:
         self.whom = list()  # type list[MemberEntity]
 
     def get_action_icon(self):
+        if self.action == "alert":
+            return ":fire:"
+        if self.action == "award":
+            return ":gem:"
         return ":fire:"
 
     def get_emotion_icon(self):
         if self.emotion == 1:
             return ":disappointed_relieved:"
         if self.emotion == 2:
-            return ""
+            return ":disappointed:"
         if self.emotion == 3:
-            return ""
+            return ":relieved:"
         if self.emotion == 4:
-            return ""
-        return ""
+            return ":smiley:"
+        return ":sunglasses:"
 
     def get_message(self, member: MemberEntity):
 
-        greetings = "Good " + ("morning <@" if datetime.now().hour < 12 else "afternoon <@") + member.slack_member + ">"
+        greetings = "Good " + ("morning <@" if datetime.now().hour < 12 else "afternoon <@") + \
+                    member.slack_member + "> \n"
 
-        temporal = " {} \n {} At {} , in {} , {} because {}. {} ".format(greetings, self.get_action_icon(),
-                                                                      ",".join(self.when), ",".join(self.where),
-                                                                      ",".join(self.what), ",".join(self.why),
-                                                                      self.get_emotion_icon())
+        temporal = " {} \n {} {}, In {} , {}. \n Because {} \n {} ".format(greetings, self.get_action_icon(),
+                                                                           ",".join(self.when), ",".join(self.where),
+                                                                           ",".join(self.what), ",".join(self.why),
+                                                                           self.get_emotion_icon())
         if self.references:
-            temporal += " Please check :male-detective:  {}".format(",".join(self.references))
+            temporal += " \n Please check :male-detective:  {}".format(",".join(self.references))
 
         return temporal
 
