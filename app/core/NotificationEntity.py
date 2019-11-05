@@ -35,10 +35,17 @@ class NotificationEntity:
         greetings = "Good " + ("morning <@" if datetime.now().hour < 12 else "afternoon <@") + \
                     member.slack_member + "> \n"
 
-        temporal = " {} \n {} {}, In {} , {}. \n Because {} \n {} ".format(greetings, self.get_action_icon(),
-                                                                           ",".join(self.when), ",".join(self.where),
-                                                                           ",".join(self.what), ",".join(self.why),
-                                                                           self.get_emotion_icon())
+        if self.why:
+            temporal = " {} \n {} {}, In {} , {}. \n Why: \n {} \n {} ".format(greetings, self.get_action_icon(),
+                                                                               ",".join(self.when), ",".join(self.where),
+                                                                               ",".join(self.what), ",".join(self.why),
+                                                                               self.get_emotion_icon())
+        else:
+            temporal = " {} \n {} {}, In {} , {}. \n {} ".format(greetings, self.get_action_icon(),
+                                                                 ",".join(self.when), ",".join(self.where),
+                                                                 ",".join(self.what),
+                                                                 self.get_emotion_icon())
+
         if self.references:
             temporal += " \n Please check :male-detective:  {}".format(",".join(self.references))
 
