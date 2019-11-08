@@ -11,9 +11,10 @@ class AvailabilityProductToNotificationTranslator:
         start = parser.parse(data["start"])
         end = parser.parse(data["end"])
 
-        notification["when"] = ["From {} to {}".format(start.strftime("%m/%d/%Y"),
+        notification["when"] = [" {} to {}".format(start.strftime("%m/%d/%Y"),
                                                        end.strftime("%m/%d/%Y"))]
 
+        organization = data["organization"]
         product = data["name"]
         proportion = data["proportion"]
         requests = data["requests"]
@@ -28,7 +29,8 @@ class AvailabilityProductToNotificationTranslator:
             notification["action"] = "alert"
 
             template = " {} of services have broken theirs SLO, availability min: {}, average: {}, max: {} "
-            notification["what"] = [template.format(proportion, service_min, service_mean, service_max)]
+            notification["what"] = [template.format(proportion, service_min,
+                                                    service_mean, service_max)]
 
             services = data["services"]
 
@@ -39,15 +41,19 @@ class AvailabilityProductToNotificationTranslator:
                 service_slo = item["slo"]
 
                 if service_budget < 0:
-                    why.append("Service: {}, SLO: {} , Availability: {} \n".format(service_name,
-                                                                                   service_slo,
-                                                                                   service_availability))
+                    why.append("*Service*: {}, *SLO*: {}, *Availability*: {}, *Budget*: {} \n".format(
+                        service_name,
+                        service_slo,
+                        service_availability,
+                        service_budget
+                    ))
         else:
             notification["action"] = "award"
             notification["emotion"] = 4
-            notification["what"] = ["Service have a good mean SLO {}  performance".format(service_mean)]
+            notification["what"] = [" A good mean SLO {}  performance".format(
+                service_mean)]
 
-        notification["where"] = ["product: {}".format(product)]
+        notification["where"] = ["*Customer*: {}, *Product*: {}".format(organization, product)]
         notification["why"] = why
         notification["references"] = data["references"]
 

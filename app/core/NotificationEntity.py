@@ -36,13 +36,14 @@ class NotificationEntity:
                     member.slack_member + "> \n"
 
         if self.why:
-            temporal = " {} \n {} {}, In {} , {}. \n Why: \n {} \n {} ".format(greetings, self.get_action_icon(),
-                                                                               ",".join(self.when), ",".join(self.where),
-                                                                               ",".join(self.what), ",".join(self.why),
+            temporal = " {} \n {} \n *When*: {} \n *Where* {} , {}. \n *Why*: \n {} \n {} ".format(greetings,
+                                                                                                 self.get_action_icon(),
+                                                                               "\n".join(self.when), ",".join(self.where),
+                                                                               ",".join(self.what), "\n".join(self.why),
                                                                                self.get_emotion_icon())
         else:
             temporal = " {} \n {} {}, In {} , {}. \n {} ".format(greetings, self.get_action_icon(),
-                                                                 ",".join(self.when), ",".join(self.where),
+                                                                 "\n".join(self.when), ",".join(self.where),
                                                                  ",".join(self.what),
                                                                  self.get_emotion_icon())
 

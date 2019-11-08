@@ -11,7 +11,7 @@ class AvailabilityServiceToNotificationTranslator:
         start = parser.parse(data["start"])
         end = parser.parse(data["end"])
 
-        notification["when"] = ["From {} to {}".format(start.strftime("%m/%d/%Y"),
+        notification["when"] = [" {} to {}".format(start.strftime("%m/%d/%Y"),
                                                        end.strftime("%m/%d/%Y"))]
 
         service = data["service"]["name"]
