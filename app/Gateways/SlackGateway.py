@@ -19,5 +19,8 @@ class SlackGateway:
         result = self.sc.api_call("chat.postMessage", channel=target, text=message)
         if not result["ok"]:
             raise ValueError(result)
+        else:
+            print(" \n send message to {}".format(target))
+
         return result
 
