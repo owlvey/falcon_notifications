@@ -13,7 +13,8 @@ class ConfigurationComponent:
         return os.environ.get("falcon_https_proxy")
 
     def get_slack_key(self):
-        return os.environ.get("owlvey_slack_key")
+        return None
+        # return os.environ.get("owlvey_slack_key")
 
     def diagnostics(self):
         result = dict()
