@@ -34,6 +34,7 @@ def post_squads_notification():
     data = request.get_json()
     notification = AvailabilitySquadToNotificationTranslator.translate(data)
     if notification:
+        print(data)
         result = component.notify(notification)
         return make_response(result, 200)
     else:
