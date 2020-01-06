@@ -32,14 +32,14 @@ class NotificationEntity:
 
     def get_message(self, member: MemberEntity):
 
-        greetings = "Good " + ("morning <@" if datetime.now().hour < 12 else "afternoon <@") + \
+        greetings = "Hello " + ("morning <@" if datetime.now().hour < 12 else "afternoon <@") + \
                     member.slack_member + "> \n"
 
         if self.why:
             temporal = " {} \n {} \n *When*: {} \n *Where* {} , {}. \n *Why*: \n {} \n {} ".format(greetings,
                                                                                                  self.get_action_icon(),
                                                                                "\n".join(self.when), ",".join(self.where),
-                                                                               ",".join(self.what), "\n".join(self.why),
+                                                                                ",".join(self.what), "\n".join(self.why),
                                                                                self.get_emotion_icon())
         else:
             temporal = " {} \n {} {}, In {} , {}. \n {} ".format(greetings, self.get_action_icon(),
