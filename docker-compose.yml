@@ -5,7 +5,8 @@ services:
     build:
       context: ./
     ports:
-      - "5000:5555"
+      - "5000:45003"
     environment:
-      - FLASK_ENV=development
-      - FLASK_APP=app/startup.py flash run --port 5555
+      #- FLASK_ENV=development
+      #- FLASK_APP=app/startup.py flash run --port 5555
+      - PATH_WSGI=app/uwsgi.ini
