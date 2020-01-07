@@ -1,0 +1,8 @@
+tests
+.gitignore
+.dockerignore
+docker-compose.yml
+.git
+.idea
+Makefile
+Dockerfile

@@ -19,5 +19,3 @@ class ConfigurationComponent:
         result = dict()
         result["owlvey_slack_key"] = True if self.get_slack_key() else False
         return result
-
-

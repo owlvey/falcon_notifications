@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  falcon_notications:
+    image: falcon_notications:v1
+    build:
+      context: ./
+    ports:
+      - "5000:45003"
+    environment:
+      #- FLASK_ENV=development
+      #- FLASK_APP=app/startup.py flash run --port 5555
+      - PATH_WSGI=app/uwsgi.ini
